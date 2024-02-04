@@ -1,0 +1,17 @@
+export { default as accordionDown } from './accordion-down.png';
+export { default as blurBackground } from './blur-background.png';
+export { default as blurRectangle } from './blur-rect.png';
+export { default as calenderIcon } from './calender.png';
+export { default as cancelIcon } from './cancel-new.png';
+export { default as checkIcon } from './check-icon.png';
+export { default as homepage } from './homepage.png';
+export { default as login } from './login.png';
+export { default as uploadIcon } from './pngwing.com.png';
+export { default as profileImage } from './profile-img.png';
+export { default as sibLogo } from './sib-logo.png';
+export { default as signatureIcon } from './signature.png';
+export { default as splash } from './splash.png';
+export { default as trash } from './Trashcan.png';
+export { default as homepage2 } from './homePage2.png';
+export { default as logo } from './logo_food.png';
+export { default as logoGreen } from './logo_green.png';

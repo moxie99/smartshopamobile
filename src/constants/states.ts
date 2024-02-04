@@ -1,0 +1,112 @@
+export const states = [{
+    STATE: "ABIA STATE",
+    STATE_CODE: "ABIA"
+}, {
+    STATE: "ABUJA (F C T)",
+    STATE_CODE: "ABUJA"
+}, {
+    STATE: "ADAMAWA STATE",
+    STATE_CODE: "ADAMA"
+}, {
+    STATE: "AKWA IBOM STATE",
+    STATE_CODE: "AKWAI"
+}, {
+    STATE: "ANAMBRA STATE",
+    STATE_CODE: "ANAMB"
+}, {
+    STATE: "BAUCHI STATE",
+    STATE_CODE: "BAUCH"
+}, {
+    STATE: "BAYELSA STATE",
+    STATE_CODE: "BAYEL"
+}, {
+    STATE: "BENUE STATE",
+    STATE_CODE: "BENUE"
+}, {
+    STATE: "BORNO STATE",
+    STATE_CODE: "BORNO"
+}, {
+    STATE: "CROSS RIVER STATE",
+    STATE_CODE: "CROSS"
+}, {
+    STATE: "DELTA STATE",
+    STATE_CODE: "DELTA"
+}, {
+    STATE: "EBONYI STATE",
+    STATE_CODE: "EBONY"
+}, {
+    STATE: "EDO STATE",
+    STATE_CODE: "EDO"
+}, {
+    STATE: "EKITI STATE",
+    STATE_CODE: "EKITI"
+}, {
+    STATE: "ENUGU STATE",
+    STATE_CODE: "ENUGU"
+}, {
+    STATE: "GOMBE STATE",
+    STATE_CODE: "GOMBE"
+}, {
+    STATE: "IMO STATE",
+    STATE_CODE: "IMO"
+}, {
+    STATE: "JIGAWA STATE",
+    STATE_CODE: "JIGAW"
+}, {
+    STATE: "KADUNA STATE",
+    STATE_CODE: "KADUN"
+}, {
+    STATE: "KANO STATE",
+    STATE_CODE: "KANO"
+}, {
+    STATE: "KATSINA STATE",
+    STATE_CODE: "KATSI"
+}, {
+    STATE: "KEBBI STATE",
+    STATE_CODE: "KEBBI"
+}, {
+    STATE: "KOGI STATE",
+    STATE_CODE: "KOGI"
+}, {
+    STATE: "KWARA STATE",
+    STATE_CODE: "KWARA"
+}, {
+    STATE: "LAGOS STATE",
+    STATE_CODE: "LAGOS"
+}, {
+    STATE: "NASSARAWA STATE",
+    STATE_CODE: "NASSA"
+}, {
+    STATE: "NIGER STATE",
+    STATE_CODE: "NIGER"
+}, {
+    STATE: "OGUN STATE",
+    STATE_CODE: "OGUN"
+}, {
+    STATE: "ONDO STATE",
+    STATE_CODE: "ONDO"
+}, {
+    STATE: "OSUN STATE",
+    STATE_CODE: "OSUN"
+}, {
+    STATE: "OYO STATE",
+    STATE_CODE: "OYO"
+}, {
+    STATE: "PLATEAU STATE",
+    STATE_CODE: "PLATE"
+}, {
+    STATE: "RIVERS STATE",
+    STATE_CODE: "RIVER"
+}, {
+    STATE: "SOKOTO STATE",
+    STATE_CODE: "SOKOT"
+}, {
+    STATE: "TARABA STATE",
+    STATE_CODE: "TARAB"
+}, {
+    STATE: "YOBE STATE",
+    STATE_CODE: "YOBE"
+}, {
+    STATE: "ZAMFARA STATE",
+    STATE_CODE: "ZAMFA"
+}]

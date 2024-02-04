@@ -1,0 +1,16 @@
+{
+  "error": {
+    "button-action": "Restart the app",
+    "details": "We Encountered an error",
+    "title": "Oops 😞!"
+  },
+  "index-screen": {
+    "body": "Onboard new customers, track food delivery",
+    "button": "LOGIN",
+    "title": "The Foodmart App"
+  },
+  "login-screen": {
+    "button": "LOGIN",
+    "warn": "Only authorised access"
+  }
+}

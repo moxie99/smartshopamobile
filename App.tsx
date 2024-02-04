@@ -1,20 +1,56 @@
+/* eslint-disable unicorn/consistent-function-scoping */
+import { ThemeProvider } from '@shopify/restyle';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppStateStatus } from 'react-native';
+import FlashMessage from 'react-native-flash-message';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { enableScreens } from 'react-native-screens';
+import { focusManager, QueryClient, QueryClientProvider } from 'react-query';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import ToastMessage from './src/components/Base/ToastMessage';
+import { ErrorBoundary } from './src/components/ErrorBoundary';
+import { isWeb } from './src/constants';
+import theme from './src/constants/theme';
+import { useAppState, useCachedResources, useOnlineManager } from './src/hooks';
+import Navigation from './src/navigation';
+
+import RootedDeviceAlert from './src/RootedDeviceAlert';
+
+function onAppStateChange(status: AppStateStatus) {
+  if (!isWeb) {
+    focusManager.setFocused(status === 'active');
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const queryClient = new QueryClient();
+
+export default function App() {
+  enableScreens(true);
+  useOnlineManager();
+  useAppState(onAppStateChange);
+
+  const isLoadingComplete = useCachedResources();
+
+  if (!isLoadingComplete) {
+    return null;
+  }
+
+  return (
+    <ErrorBoundary>
+      <ThemeProvider theme={theme}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <SafeAreaProvider>
+            <RootedDeviceAlert />
+            <QueryClientProvider client={queryClient}>
+              <Navigation />
+              <ToastMessage />
+              <FlashMessage position='top' />
+            </QueryClientProvider>
+          </SafeAreaProvider>
+          <StatusBar style='light' />
+        </GestureHandlerRootView>
+      </ThemeProvider>
+    </ErrorBoundary>
+  );
+}
