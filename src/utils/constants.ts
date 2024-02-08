@@ -483,3 +483,16 @@ export const prepTime = [
 ];
 
 export const minOrderAmount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'Bulk'];
+
+
+export const deliveryDays = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
+
+export const paymentfrequency = ['Weekly', 'Biweekly', 'Monthly'];

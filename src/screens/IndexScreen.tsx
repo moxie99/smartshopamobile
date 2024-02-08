@@ -34,7 +34,7 @@ export default function IndexScreen() {
   };
 
   const createAccount = () => {
-    navigation.navigate('CreateRequestScreen');
+    navigation.navigate('BusinessNameScreen');
   };
 
   return (
@@ -56,7 +56,7 @@ export default function IndexScreen() {
               style={styles.text}
               variant='bold24'
             >
-              FoodMart
+              SmartShopa
             </Text>
             <Text color='white' style={styles.text} variant='regular14'>
               Register or Log In as a Vendor

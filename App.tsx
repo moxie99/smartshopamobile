@@ -15,7 +15,7 @@ import theme from './src/constants/theme';
 import { useAppState, useCachedResources, useOnlineManager } from './src/hooks';
 import Navigation from './src/navigation';
 
-import RootedDeviceAlert from './src/RootedDeviceAlert';
+
 
 function onAppStateChange(status: AppStateStatus) {
   if (!isWeb) {
@@ -41,7 +41,6 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>
-            <RootedDeviceAlert />
             <QueryClientProvider client={queryClient}>
               <Navigation />
               <ToastMessage />

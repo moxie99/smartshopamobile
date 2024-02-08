@@ -25,7 +25,7 @@ export const palette = {
   harsh: '#EFEFEF',
   lightblue: 'rgba(0, 92, 200, 0.08)',
   lightgray: '#EFEFEF',
-  primary: '#224807',
+  primary: '#CC5500',
   purple: '#665EC7',
   purple16: '#A4A0DE',
   secondary: '#878681',

@@ -169,7 +169,7 @@ export default function FormInput<T>({
       </Pressable>
       {fieldState.error ? (
         <AnimatedText
-          color='error'
+          color='white'
           entering={FadeIn}
           exiting={FadeOut}
           fontSize={12}

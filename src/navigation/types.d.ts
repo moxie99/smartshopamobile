@@ -5,15 +5,16 @@ import {
 
 export type AppNavRoutes = {
   CreateRequestScreen: undefined;
+  BusinessNameScreen: undefined;
   EditProfile: undefined;
   HomeScreen: undefined;
   IndexScreen: undefined;
   LoginScreen: undefined;
-  BvnInfoScreen: undefined;
-  BvnServiceScreen: undefined;
-  BvnUploadScreen: undefined;
-  BvnPersonalInfoScreen: undefined;
-  OtpVerificationScreen: undefined;
+  ProductDetailsScreen: undefined;
+  CompDocScreen: undefined;
+  DeliveryPreferenceScreen: undefined;
+  TermsAndAgreementScreen: undefined;
+  PaymentAndBillingScreen: undefined;
   NewRequestScreen: undefined;
   RequestDetailsScreen: undefined;
   NextOfKinScreen: undefined;

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { RFValue } from 'react-native-responsive-fontsize';
-
+import { Ionicons } from '@expo/vector-icons';
 import { Box, Icon } from '../Base';
 import { RenderItemProps, SelectButtonProps } from '../Button/SelectButton';
 import { palette } from '../../constants/theme';
@@ -174,7 +174,7 @@ const SelectButtonTitle = ({
             zIndex: 2,
           }}
         >
-          <Icon height={12} name='caret-down-icon' size='m' width={12} />
+          <Ionicons name='caret-down-sharp' size={20} color={palette.primary} />
         </View>
       </TouchableOpacity>
       <Modal

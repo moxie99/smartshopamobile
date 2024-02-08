@@ -16,10 +16,16 @@ import { Text } from '../components/Typography';
 import { resetNavigation } from '../navigation/ResetNavigator';
 
 import useStore from '../store/useStore';
-import { minOrderAmount, openingTime, prepTime } from '../utils/constants';
+import {
+  deliveryDays,
+  minOrderAmount,
+  openingTime,
+  prepTime,
+} from '../utils/constants';
 import SelectButton from '../components/Button/SelectButton';
+import SimpleInput from '../components/Input/SimpleInput';
 
-export default function BvnUploadScreen() {
+export default function DeliveryPreferenceScreen() {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   const { accountOpeningData, setAccountOpeningData } = useStore(
@@ -28,11 +34,11 @@ export default function BvnUploadScreen() {
 
   const navigateToPaymentScreen = () => {
     setIsLoading(true);
-    navigation.navigate('OtpVerificationScreen');
+    navigation.navigate('PaymentAndBillingScreen');
     setIsLoading(false);
   };
   return (
-    <LayoutComponent isIcon label='MORE DETAILS ABOUT RESTAURANT'>
+    <LayoutComponent isIcon label='DELIVERY PREFERENCES'>
       <ScrollBox
         backgroundColor='white'
         bounces={false}
@@ -41,90 +47,75 @@ export default function BvnUploadScreen() {
       >
         <Box marginBottom='sl' marginTop='md'>
           <Box marginTop='lg'>
-            <ImagePickerButton
-              label='UPLOAD COVER IMAGE'
-              onChange={(value) => {
+            <SelectButton
+              data={deliveryDays}
+              label='DELIVERY DAY 1'
+              onChangeText={(value) =>
                 setAccountOpeningData({
                   ...accountOpeningData,
-                  requiredDocuments: {
-                    ...accountOpeningData.requiredDocuments,
-                    utilityBill: value.base64,
-                    utilityBillName: value.fileName,
-                  },
-                });
-              }}
-              value={accountOpeningData?.requiredDocuments?.utilityBillName}
+                  deliveryDay1: value,
+                })
+              }
+              value={accountOpeningData?.deliveryDay1}
             />
             <SelectButton
               data={['Yes', 'No']}
-              label='Open in weekends'
+              label='Do you wish to pick another day with the first picked?'
               onChangeText={(value) =>
                 setAccountOpeningData({
                   ...accountOpeningData,
-                  openWeekend: value,
+                  wantTopickOtherDays: value,
                 })
               }
-              value={
-                accountOpeningData?.openWeekend
-                  ? accountOpeningData?.openWeekend
-                  : 'No'
-              }
+              value={accountOpeningData?.wantTopickOtherDays}
             />
-            <SelectButton
-              data={openingTime}
-              label='Opening TIME'
-              onChangeText={(value) =>
-                setAccountOpeningData({
-                  ...accountOpeningData,
-                  openingTime: value,
-                })
-              }
-              value={accountOpeningData?.openingTime}
-            />
-            <SelectButton
-              data={openingTime}
-              label='CUT OUT TIME(CLOSING TIME)'
-              onChangeText={(value) =>
-                setAccountOpeningData({
-                  ...accountOpeningData,
-                  closingTime: value,
-                })
-              }
-              value={accountOpeningData?.closingTime}
-            />
-            <SelectButton
-              data={prepTime}
-              label='MEAL READY TIME'
-              onChangeText={(value) =>
-                setAccountOpeningData({
-                  ...accountOpeningData,
-                  mealReadyTime: value,
-                })
-              }
-              value={accountOpeningData?.mealReadyTime}
-            />
-            <SelectButton
-              data={prepTime}
-              label='PREPARATION TIME'
-              onChangeText={(value) =>
-                setAccountOpeningData({
-                  ...accountOpeningData,
-                  prepTime: value,
-                })
-              }
-              value={accountOpeningData?.prepTime}
-            />
+            {accountOpeningData?.wantTopickOtherDays === 'Yes' && (
+              <SelectButton
+                data={deliveryDays}
+                label='DELIVERY DAY 2'
+                onChangeText={(value) =>
+                  setAccountOpeningData({
+                    ...accountOpeningData,
+                    deliveryDay2: value,
+                  })
+                }
+                value={accountOpeningData?.deliveryDay2}
+              />
+            )}
 
             <SelectButton
-              data={minOrderAmount}
-              label='MINIMUM ORDER AMOUNT'
+              data={['Yes', 'No']}
+              label='CAN YOU DELIVER EVERYDAY?'
               onChangeText={(value) =>
                 setAccountOpeningData({
                   ...accountOpeningData,
-                  minOrder: value,
+                  deliverDaily: value,
                 })
               }
-              value={accountOpeningData?.minOrder}
+              value={accountOpeningData?.deliverDaily}
+            />
+            <SimpleInput
+              label='DELIVERY AREA(Zip codes and Neighbourhood etc)'
+              maxLength={100}
+              onChangeText={(value: string) => {
+                setAccountOpeningData({
+                  ...accountOpeningData,
+                  deliveryArea: value,
+                });
+              }}
+              value={accountOpeningData?.deliveryArea}
+            />
+
+            <SimpleInput
+              label='PREFERRED DELIVERY PARTNERS(if any)'
+              maxLength={100}
+              onChangeText={(value: string) => {
+                setAccountOpeningData({
+                  ...accountOpeningData,
+                  preferredDeliveryPartners: value,
+                });
+              }}
+              value={accountOpeningData?.preferredDeliveryPartners}
             />
           </Box>
           <Box marginBottom='sl' marginTop='xl'>

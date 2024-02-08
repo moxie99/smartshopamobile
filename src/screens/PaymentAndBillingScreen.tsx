@@ -12,20 +12,20 @@ import navigation from '../navigation';
 import { useNavigation } from '@react-navigation/native';
 import { successful } from '../assets/lottie';
 import { resetNavigation } from '../navigation/ResetNavigator';
+import SelectButton from '../components/Button/SelectButton';
+import { paymentfrequency } from '../utils/constants';
 
-export default function OtpVerificationScreen() {
+export default function PaymentAndBillingScreen() {
   const navigation = useNavigation();
-  const [value, setValue] = useState('');
-  const [isVisible, setIsVisble] = useState(false);
   const { accountOpeningData, setAccountOpeningData } = useStore(
     (state) => state
   );
 
-  const makeModalVisible = () => {
-    setIsVisble(!isVisible);
+  const navToCompAndDocScreen = () => {
+    navigation.navigate('CompDocScreen');
   };
   return (
-    <LayoutComponent label='PAYMENT INFORMATION' isIcon>
+    <LayoutComponent label='PAYMENT AND BILLING' isIcon>
       <ScrollBox
         backgroundColor='white'
         bounces={false}
@@ -33,6 +33,17 @@ export default function OtpVerificationScreen() {
         paddingHorizontal='md'
       >
         <Box marginBottom='sl' marginTop='md'>
+          <SelectButton
+            data={paymentfrequency}
+            label='PAYMENT TERMS'
+            onChangeText={(value) =>
+              setAccountOpeningData({
+                ...accountOpeningData,
+                paymentTerms: value,
+              })
+            }
+            value={accountOpeningData?.paymentTerms}
+          />
           <SimpleInput
             keyboardType='numeric'
             label='BANK ACCOUNT NUMBER'
@@ -49,7 +60,7 @@ export default function OtpVerificationScreen() {
             onChangeText={(value: string) =>
               setAccountOpeningData({ ...accountOpeningData, acctName: value })
             }
-            placeholder='Enter BAK ACCOUNT NAME'
+            placeholder='Enter BANK ACCOUNT NAME'
             value={accountOpeningData?.acctName}
           />
           <SimpleInput
@@ -58,7 +69,7 @@ export default function OtpVerificationScreen() {
             onChangeText={(value: string) =>
               setAccountOpeningData({ ...accountOpeningData, bankName: value })
             }
-            placeholder='Enter BVN'
+            placeholder='Enter BANK NAME'
             value={accountOpeningData?.bankName}
           />
           <SimpleInput
@@ -74,82 +85,38 @@ export default function OtpVerificationScreen() {
 
           <SimpleInput
             keyboardType='default'
-            label='NOTIFICATION PAGE'
-            maxLength={100}
-            onChangeText={(value: string) =>
-              setAccountOpeningData({ ...accountOpeningData, notifPage: value })
-            }
-            placeholder='Enter BVN'
-            value={accountOpeningData?.notifPage}
-          />
-          <SimpleInput
-            keyboardType='default'
-            label='SIGN OUT PAGE'
-            maxLength={100}
+            label='BILLING CONTRACT INFORMATION'
             onChangeText={(value: string) =>
               setAccountOpeningData({
                 ...accountOpeningData,
-                signOutPage: value,
+                billContInfo: value,
               })
             }
-            placeholder='Enter BVN'
-            value={accountOpeningData?.signOutPage}
+            placeholder='Enter Additional Information'
+            value={accountOpeningData?.billContInfo}
+          />
+          <SimpleInput
+            keyboardType='numeric'
+            label='TAX IDENTIFICATION NUMBER'
+            maxLength={9}
+            onChangeText={(value: string) =>
+              setAccountOpeningData({
+                ...accountOpeningData,
+                tin: value,
+              })
+            }
+            placeholder='Enter Tax Identification Number'
+            value={accountOpeningData?.tin}
           />
 
           <Box marginBottom='sl' style={{ marginTop: 50 }}>
             <NextButton
               label='SUBMIT FOR VERIFICATION'
-              onPress={makeModalVisible}
+              onPress={navToCompAndDocScreen}
             />
           </Box>
         </Box>
       </ScrollBox>
-      <Modal isVisible={isVisible}>
-        <Box
-          alignItems='center'
-          backgroundColor='white'
-          borderRadius={10}
-          justifyContent='center'
-          padding='sm'
-        >
-          <Box height={RFValue(150)} width='100%'>
-            <LottieView autoPlay loop source={successful} />
-          </Box>
-
-          <Text
-            color='black'
-            marginBottom='sm'
-            marginTop='sm'
-            variant='medium14'
-          >
-            Congratulations
-          </Text>
-          <Text
-            color='black'
-            marginBottom='sm'
-            textAlign='center'
-            variant='regular14'
-          >
-            Congratulations, your account has been submitted for review, you
-            will get an email from us, once the verification process is
-            complete. In the mean time, you can log in and chat eith the support
-            team.
-          </Text>
-          <Box
-            marginBottom='xxl'
-            marginTop='sm'
-            style={{ width: RFValue(100) }}
-          >
-            <NextButton
-              label='Done'
-              onPress={() => {
-                setAccountOpeningData({});
-                resetNavigation('HomeScreen');
-              }}
-            />
-          </Box>
-        </Box>
-      </Modal>
     </LayoutComponent>
   );
 }

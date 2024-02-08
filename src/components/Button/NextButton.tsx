@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
   containerStyle: {
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: '#224807',
-    borderColor: '#224807',
+    backgroundColor: palette.primary,
+    borderColor: palette.primary,
     borderRadius: 10,
     borderWidth: 1,
     height: RFValue(55),

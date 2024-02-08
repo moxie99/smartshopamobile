@@ -8,16 +8,16 @@ import { withTranslation } from 'react-i18next';
 
 import { navigationRef } from './ResetNavigator';
 import {
-  BvnInfoScreen,
-  BvnPersonalInfoScreen,
-  BvnServiceScreen,
-  BvnUploadScreen,
+  ProductDetailsScreen,
+  TermsAndAgreementScreen,
+  CompDocScreen,
+  DeliveryPreferenceScreen,
   CreateRequestScreen,
   HomeScreen,
   IndexScreen,
   LoginScreen,
   NewRequestScreen,
-  OtpVerificationScreen,
+  PaymentAndBillingScreen,
   RequestDetailsScreen,
 } from '../screens/';
 import CreatedAccountsScreen from '../screens/CreatedAccountsScreen';
@@ -31,6 +31,7 @@ import { OrderBottomTab } from './bottomNavs/OrderBottomTab';
 import { PaymentBottomTab } from './bottomNavs/PaymentBottomTab';
 import EditProfile from '../screens/EditProfile';
 import { MainBottomTab } from './bottomNavs/MainBottomTab';
+import BusinessNameScreen from '../screens/BusinessNameScreen';
 
 export type AppNavScreenProps<Screen extends keyof AppNavRoutes> =
   StackScreenProps<AppNavRoutes, Screen>;
@@ -58,16 +59,22 @@ function Navigation() {
           component={RequestDetailsScreen}
           name='RequestDetailsScreen'
         />
-        <Stack.Screen component={BvnInfoScreen} name='BvnInfoScreen' />
-        <Stack.Screen component={BvnServiceScreen} name='BvnServiceScreen' />
-        <Stack.Screen component={BvnUploadScreen} name='BvnUploadScreen' />
         <Stack.Screen
-          component={BvnPersonalInfoScreen}
-          name='BvnPersonalInfoScreen'
+          component={ProductDetailsScreen}
+          name='ProductDetailsScreen'
+        />
+        <Stack.Screen component={CompDocScreen} name='CompDocScreen' />
+        <Stack.Screen
+          component={DeliveryPreferenceScreen}
+          name='DeliveryPreferenceScreen'
         />
         <Stack.Screen
-          component={OtpVerificationScreen}
-          name='OtpVerificationScreen'
+          component={TermsAndAgreementScreen}
+          name='TermsAndAgreementScreen'
+        />
+        <Stack.Screen
+          component={PaymentAndBillingScreen}
+          name='PaymentAndBillingScreen'
         />
         <Stack.Screen component={EditProfile} name='EditProfile' />
         <Stack.Screen component={NextOfKinScreen} name='NextOfKinScreen' />
@@ -89,6 +96,10 @@ function Navigation() {
         <Stack.Screen name='OrderRoot' component={OrderBottomTab} />
         <Stack.Screen name='PaymentRoot' component={PaymentBottomTab} />
         <Stack.Screen name='MainRoot' component={MainBottomTab} />
+        <Stack.Screen
+          name='BusinessNameScreen'
+          component={BusinessNameScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

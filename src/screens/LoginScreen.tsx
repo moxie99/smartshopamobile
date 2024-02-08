@@ -56,13 +56,13 @@ export default function LoginScreen() {
   };
 
   const createAccount = () => {
-    navigation.navigate('CreateRequestScreen');
+    navigation.navigate('BusinessNameScreen');
   };
 
   return (
     <Box alignItems='center' flex={1} justifyContent='center'>
       <StatusBar style='light' />
-      <ImageBackground flex={1} source={login} width='100%'>
+      <ImageBackground flex={1} source={login} width='100%' height='100%'>
         <SafeAreaView edges={['bottom', 'top']} style={styles.safeArea}>
           <Box
             alignItems='center'

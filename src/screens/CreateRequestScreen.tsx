@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,15 +11,16 @@ import SimpleInput from '../components/Input/SimpleInput';
 import CountryCodeSelectButton from '../components/Button/CountryCodeSelectButton';
 import { countryCode } from '../constants/countryCode';
 import DatePickerButton from '../components/Button/DatePickerButton';
-import { CheckBoxButton, NextButton } from '../components/Button';
+import { NextButton, PreviousButton } from '../components/Button';
 import { useIsMutating } from 'react-query';
 import ProgressLoader from 'rn-progress-loader';
-import { Capitalize, showToast } from '../utils/helpers';
+import { Capitalize } from '../utils/helpers';
 import { Text } from '../components/Typography';
 import { useNavigation } from '@react-navigation/native';
 import TermsModal from '../components/Base/TermsModal';
 import useStore from '../store/useStore';
-import { FormInput } from '../components/Input';
+import SelectButtonTitle from '../components/Button/SelectButtonTitle';
+import { titleList } from '../utils/constants';
 const CreateRequestScreen = () => {
   const { accountOpeningData, setAccountOpeningData } = useStore(
     (state) => state
@@ -29,14 +30,13 @@ const CreateRequestScreen = () => {
   const navigation = useNavigation();
   const isMutation = useIsMutating();
   const [searchData, setSearchData] = useState('');
-  const [isTerms, setTerms] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
     residentialAddress: Yup.string().required('Address is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
+    title: Yup.string().required('Title/Position is required'),
     DateOfBirth: Yup.date().required('Date of Birth is required'),
     password: Yup.string()
       .matches(
@@ -72,26 +72,16 @@ const CreateRequestScreen = () => {
       phoneNumber: accountOpeningData.phoneNumber || '',
       DateOfBirth: accountOpeningData.DateOfBirth || null,
       password: accountOpeningData.password || '',
+      title: accountOpeningData.title || '',
     },
     validationSchema: validationSchema,
     onSubmit: () => {
-      if (isChecked) {
-        navigation.navigate('BvnInfoScreen');
-      } else {
-        showToast({
-          message:
-            'Please agree to consent, and read through terms and condition',
-          type: 'warning',
-        });
-      }
+      navigation.navigate('ProductDetailsScreen');
     },
   });
 
-  const handleCloseTerms = () => {
-    setTerms(false);
-  };
-  const handleAcceptTerms = () => {
-    setAccountOpeningData({ ...accountOpeningData, acceptTerms: true });
+  const submit = () => {
+    navigation.navigate('ProductDetailsScreen');
   };
 
   return (
@@ -107,7 +97,7 @@ const CreateRequestScreen = () => {
         </Text>
         <SimpleInput
           keyboardType='default'
-          label='NAME'
+          label='FULL NAME'
           onChangeText={(value: string) => {
             formik.handleChange('name')(value);
             setAccountOpeningData({ ...accountOpeningData, name: value });
@@ -115,15 +105,32 @@ const CreateRequestScreen = () => {
           placeholder='Enter Full Name'
           value={accountOpeningData?.name}
         />
-
         {formik.touched.name && formik.errors.name && (
           <Text variant={'medium12'} color='error'>
             {formik.errors.name ?? ''}
           </Text>
         )}
+
+        <SelectButtonTitle
+          data={titleList}
+          label='POSITION/TITLE'
+          onChangeText={(value) => {
+            // formik.handleChange('title')(value);
+            setAccountOpeningData({
+              ...accountOpeningData,
+              title: value?.title,
+            });
+          }}
+          value={accountOpeningData?.title}
+        />
+        {/* {formik.touched.title && formik.errors.title && (
+          <Text variant={'medium12'} color='error'>
+            {formik.errors.title ?? ''}
+          </Text>
+        )} */}
         <SimpleInput
           keyboardType='default'
-          label='EMAIL'
+          label='EMAIL ADDRESS'
           maxLength={50}
           onChangeText={(value: string) => {
             formik.handleChange('email')(value);
@@ -225,35 +232,6 @@ const CreateRequestScreen = () => {
             {formik.errors.DateOfBirth ?? ''}
           </Text>
         )}
-        <CheckBoxButton
-          isChecked={isChecked}
-          label='By ticking this box you hereby confirm that you have read & accept the Terms and Conditions and consent to the processing of your information by a Third Party'
-          labelSize={12}
-          setChecked={(value) => {
-            setIsChecked(value);
-          }}
-        />
-        <TouchableOpacity
-          onPress={() => {
-            if (isTerms) {
-              return showToast({
-                message: 'Select account tier',
-                type: 'danger',
-              });
-            }
-            setTerms(true);
-          }}
-          style={{ marginTop: 20 }}
-        >
-          <Text
-            color='primary'
-            fontWeight='bold'
-            textDecorationLine='underline'
-            variant='regular14'
-          >
-            Terms and Conditions
-          </Text>
-        </TouchableOpacity>
 
         <Box
           flex={1}
@@ -261,15 +239,12 @@ const CreateRequestScreen = () => {
           marginBottom='lg'
           marginTop='lg'
         >
-          <NextButton label='Next' onPress={formik.handleSubmit} />
+          <NextButton label='Next' onPress={submit} />
+        </Box>
+        <Box marginBottom='sl'>
+          <PreviousButton onPress={() => navigation.goBack()} />
         </Box>
       </KeyBoardAwareScrollBox>
-      <TermsModal
-        closeModal={handleCloseTerms}
-        handleAcceptTerms={handleAcceptTerms}
-        isVisible={isTerms}
-        // type={accountOpeningData?.accountType}
-      />
       <ProgressLoader
         color='#FFFFFF'
         hudColor='#000000'
